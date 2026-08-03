@@ -1,0 +1,92 @@
+/* ---------- Landing page ---------- */
+.landing-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+
+  /* Background image: a layered botanical silhouette scene (self-contained
+     SVG data URI) blended with a deep pine gradient. */
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(10, 26, 20, 0.55) 0%,
+      rgba(10, 26, 20, 0.75) 100%
+    ),
+    url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' width='1600' height='900'%3E%3Crect width='1600' height='900' fill='%231B3B2F'/%3E%3Ccircle cx='1300' cy='160' r='190' fill='%23234A3B'/%3E%3Cpath d='M0 620 C 200 560, 400 700, 650 600 C 900 500, 1050 660, 1250 590 C 1400 545, 1500 600, 1600 560 L1600 900 L0 900 Z' fill='%23163127'/%3E%3Cpath d='M0 700 C 250 660, 420 760, 700 690 C 950 630, 1150 740, 1350 680 C 1470 645, 1550 690, 1600 665 L1600 900 L0 900 Z' fill='%2312271F'/%3E%3Cg fill='%230F211A'%3E%3Cpath d='M120 900 L120 640 C 60 620 40 560 60 520 C 90 560 110 590 120 610 C 125 540 160 480 200 460 C 190 530 170 580 155 610 C 190 570 230 555 270 560 C 230 590 190 620 165 650 C 185 640 210 645 230 660 C 195 665 165 690 150 720 L150 900 Z'/%3E%3Cpath d='M420 900 L420 700 C 380 685 365 645 375 615 C 400 640 412 660 420 675 C 425 630 450 590 480 575 C 470 620 458 655 448 675 C 470 650 495 645 520 655 C 495 670 470 690 458 710 L458 900 Z'/%3E%3Cpath d='M980 900 L980 660 C 930 640 912 590 925 555 C 955 585 970 610 980 630 C 985 575 1020 525 1060 505 C 1045 560 1030 605 1018 630 C 1050 600 1085 595 1115 605 C 1085 625 1050 655 1035 685 L1035 900 Z'/%3E%3Cpath d='M1450 900 L1450 720 C 1415 705 1402 670 1410 645 C 1432 665 1442 682 1450 695 C 1454 655 1480 618 1510 605 C 1498 645 1487 675 1478 695 C 1500 675 1525 670 1548 678 C 1525 692 1500 715 1488 738 L1488 900 Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  background-position: center, center;
+}
+
+.landing-overlay {
+  max-width: 560px;
+  padding: 3rem 3.5rem;
+  margin-left: 6vw;
+  color: #f4f6f0;
+}
+
+.landing-eyebrow {
+  font-family: "Work Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #e4a94a;
+  margin-bottom: 1rem;
+}
+
+.landing-title {
+  font-family: "Fraunces", serif;
+  font-size: 3.6rem;
+  font-weight: 600;
+  line-height: 1.05;
+  margin: 0 0 1.4rem 0;
+}
+
+.landing-subtitle {
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #dfe6da;
+  margin-bottom: 2.2rem;
+  max-width: 460px;
+}
+
+.get-started-btn {
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1b3b2f;
+  background: #e4a94a;
+  border: none;
+  padding: 0.9rem 2.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.get-started-btn:hover {
+  background: #f0bb63;
+  transform: translateY(-2px);
+}
+
+.get-started-btn:focus-visible {
+  outline: 3px solid #f4f6f0;
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .landing-overlay {
+    margin-left: 0;
+    padding: 2rem 1.4rem;
+    text-align: left;
+  }
+  .landing-title {
+    font-size: 2.4rem;
+  }
+  .landing-subtitle {
+    font-size: 1rem;
+  }
+}
