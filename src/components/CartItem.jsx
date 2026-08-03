@@ -1,118 +1,121 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  incrementQuantity,
-  decrementQuantity,
-  removeItem,
-} from "../redux/CartSlice";
-import "./CartItem.css";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeItem, updateQuantity } from '../redux/CartSlice';
+import './CartItem.css';
 
-function CartItem() {
+function CartItem({ onContinueShopping }) {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [checkoutMessage, setCheckoutMessage] = useState(false);
 
-  const totalAmount = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-
-  const handleIncrement = (id) => dispatch(incrementQuantity(id));
-  const handleDecrement = (id) => dispatch(decrementQuantity(id));
-  const handleDelete = (id) => dispatch(removeItem(id));
-
-  const handleCheckout = () => {
-    setCheckoutMessage(true);
+  // Calculates the subtotal cost for a single cart item (cost * quantity)
+  const calculateTotalCost = (item) => {
+    const unitCost = parseFloat(item.cost.replace('$', ''));
+    return (unitCost * item.quantity).toFixed(2);
   };
 
-  const handleContinueShopping = () => {
-    navigate("/products");
+  // Calculates the total amount for all items in the cart
+  const calculateTotalAmount = () => {
+    return cartItems
+      .reduce((total, item) => {
+        const unitCost = parseFloat(item.cost.replace('$', ''));
+        return total + unitCost * item.quantity;
+      }, 0)
+      .toFixed(2);
+  };
+
+  const handleIncrement = (item) => {
+    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
+  };
+
+  const handleDecrement = (item) => {
+    if (item.quantity > 1) {
+      dispatch(
+        updateQuantity({ name: item.name, quantity: item.quantity - 1 })
+      );
+    } else {
+      dispatch(removeItem(item.name));
+    }
+  };
+
+  const handleRemove = (item) => {
+    dispatch(removeItem(item.name));
+  };
+
+  const handleContinueShopping = (e) => {
+    e.preventDefault();
+    if (onContinueShopping) {
+      onContinueShopping(e);
+    }
+  };
+
+  const handleCheckoutShopping = () => {
+    alert('Coming Soon! Checkout functionality is not yet implemented.');
   };
 
   return (
-    <main className="cart-page">
-      <h1>Your Cart</h1>
+    <div className="cart-container">
+      <h2 className="total_cart_amount">
+        Total Cart Amount: ${calculateTotalAmount()}
+      </h2>
 
       {cartItems.length === 0 ? (
-        <div className="empty-cart">
-          <p>Your cart is empty.</p>
-          <button className="continue-btn" onClick={handleContinueShopping}>
-            Continue Shopping
-          </button>
-        </div>
+        <p className="empty-cart-message">Your cart is empty.</p>
       ) : (
-        <>
-          <div className="cart-total">
-            Total: <span>${totalAmount.toFixed(2)}</span>
-          </div>
-
-          <div className="cart-items">
-            {cartItems.map((item) => (
-              <div className="cart-item" key={item.id}>
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="cart-item-thumbnail"
-                />
-                <div className="cart-item-details">
-                  <h3>{item.name}</h3>
-                  <p className="cart-item-unit-price">
-                    ${item.price.toFixed(2)} each
-                  </p>
-
-                  <div className="quantity-controls">
-                    <button
-                      className="qty-btn"
-                      onClick={() => handleDecrement(item.id)}
-                      aria-label={`Decrease quantity of ${item.name}`}
-                    >
-                      −
-                    </button>
-                    <span className="qty-value">{item.quantity}</span>
-                    <button
-                      className="qty-btn"
-                      onClick={() => handleIncrement(item.id)}
-                      aria-label={`Increase quantity of ${item.name}`}
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-
-                <div className="cart-item-side">
-                  <p className="cart-item-subtotal">
-                    ${(item.price * item.quantity).toFixed(2)}
-                  </p>
+        <div>
+          {cartItems.map((item) => (
+            <div className="cart-item" key={item.name}>
+              <img
+                className="cart-item-image"
+                src={item.image}
+                alt={item.name}
+              />
+              <div className="cart-item-details">
+                <div className="cart-item-name">{item.name}</div>
+                <div className="cart-item-cost">{item.cost}</div>
+                <div className="cart-item-quantity">
                   <button
-                    className="delete-btn"
-                    onClick={() => handleDelete(item.id)}
+                    className="cart-item-button cart-item-button-dec"
+                    onClick={() => handleDecrement(item)}
                   >
-                    Delete
+                    -
+                  </button>
+                  <span className="cart-item-quantity-value">
+                    {item.quantity}
+                  </span>
+                  <button
+                    className="cart-item-button cart-item-button-inc"
+                    onClick={() => handleIncrement(item)}
+                  >
+                    +
                   </button>
                 </div>
+                <div className="cart-item-total">
+                  Subtotal: ${calculateTotalCost(item)}
+                </div>
+                <button
+                  className="cart-item-delete-button"
+                  onClick={() => handleRemove(item)}
+                >
+                  Delete
+                </button>
               </div>
-            ))}
-          </div>
-
-          <div className="cart-actions">
-            <button className="continue-btn" onClick={handleContinueShopping}>
-              Continue Shopping
-            </button>
-            <button className="checkout-btn" onClick={handleCheckout}>
-              Checkout
-            </button>
-          </div>
-
-          {checkoutMessage && (
-            <p className="checkout-message">
-              Checkout is coming soon — thanks for your patience!
-            </p>
-          )}
-        </>
+            </div>
+          ))}
+        </div>
       )}
-    </main>
+
+      <div className="cart-actions">
+        <button
+          className="continue_shopping_btn"
+          onClick={handleContinueShopping}
+        >
+          Continue Shopping
+        </button>
+        <button className="get_started_button1" onClick={handleCheckoutShopping}>
+          Checkout
+        </button>
+      </div>
+    </div>
   );
 }
 

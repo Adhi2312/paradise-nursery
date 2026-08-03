@@ -1,71 +1,48 @@
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./redux/store";
-import Navbar from "./components/Navbar";
-import AboutUs from "./components/AboutUs";
-import ProductList from "./components/ProductList";
-import CartItem from "./components/CartItem";
-import "./App.css";
-
-function LandingPage() {
-  const navigate = useNavigate();
-
-  return (
-    <>
-      <header className="landing-page">
-        <div className="landing-overlay">
-          <p className="landing-eyebrow">Paradise Nursery</p>
-          <h1 className="landing-title">Bring the outside in.</h1>
-          <p className="landing-subtitle">
-            Hand-picked houseplants, delivered ready to thrive — from
-            air-purifying greenery to windowsill herbs and easy succulents.
-          </p>
-          <button
-            className="get-started-btn"
-            onClick={() => navigate("/products")}
-          >
-            Get Started
-          </button>
-        </div>
-      </header>
-      <AboutUs />
-    </>
-  );
-}
-
-function AppRoutes() {
-  return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route
-        path="/products"
-        element={
-          <>
-            <Navbar />
-            <ProductList />
-          </>
-        }
-      />
-      <Route
-        path="/cart"
-        element={
-          <>
-            <Navbar />
-            <CartItem />
-          </>
-        }
-      />
-    </Routes>
-  );
-}
+import React, { useState } from 'react';
+import ProductList from './components/ProductList';
+import AboutUs from './components/AboutUs';
+import './App.css';
 
 function App() {
+  const [showProductList, setShowProductList] = useState(false);
+
+  const handleGetStartedClick = () => {
+    setShowProductList(true);
+  };
+
+  const handleHomeClick = () => {
+    setShowProductList(false);
+  };
+
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
-    </Provider>
+    <div className="app-container">
+      <div className={`landing-page ${showProductList ? 'fade-out' : ''}`}>
+        <div className="background-image"></div>
+        <div className="content">
+          <div className="landing_content">
+            <h1>Welcome To Paradise Nursery</h1>
+            <div className="divider"></div>
+            <p>Where Green Meets Serenity</p>
+            <button
+              className="get-started-button"
+              onClick={handleGetStartedClick}
+            >
+              Get Started
+            </button>
+          </div>
+          <div className="aboutus_container">
+            <AboutUs />
+          </div>
+        </div>
+      </div>
+      <div
+        className={`product-list-container ${
+          showProductList ? 'visible' : ''
+        }`}
+      >
+        <ProductList onHomeClick={handleHomeClick} />
+      </div>
+    </div>
   );
 }
 

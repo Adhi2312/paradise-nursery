@@ -1,5 +1,4 @@
-// Generates a simple, unique potted-plant SVG thumbnail as a data URI.
-// This keeps the project fully self-contained (no external image hosting needed).
+// Self-contained SVG thumbnail generator (no external image hosting needed).
 function potSVG({ leaf, leaf2, pot, potDark, shape }) {
   const leaves = {
     round: `
@@ -36,182 +35,133 @@ function potSVG({ leaf, leaf2, pot, potDark, shape }) {
 </svg>`)}`;
 }
 
-const categories = [
+const pot = "#B5653F";
+const potDark = "#8C4A2C";
+const potAlt = "#7A6A53";
+const potAltDark = "#5C4E3B";
+
+export const plantsArray = [
   {
-    id: "air-purifying",
-    name: "Air Purifying Plants",
-    blurb: "Plants that quietly filter your air while they grow.",
+    category: "Air Purifying Plants",
+    plants: [
+      {
+        name: "Snake Plant",
+        image: potSVG({ leaf: "#2F6B3A", leaf2: "#3E8B4A", pot, potDark, shape: "spiky" }),
+        description: "A hardy upright plant that filters indoor air even in low light.",
+        cost: "$24.99",
+      },
+      {
+        name: "Peace Lily",
+        image: potSVG({ leaf: "#356B45", leaf2: "#4A8759", pot: potAlt, potDark: potAltDark, shape: "fan" }),
+        description: "Glossy leaves and white blooms that thrive in shaded corners.",
+        cost: "$29.99",
+      },
+      {
+        name: "Areca Palm",
+        image: potSVG({ leaf: "#2E6E4C", leaf2: "#3E8A63", pot, potDark, shape: "fan" }),
+        description: "Feathery fronds that bring a breezy, tropical feel indoors.",
+        cost: "$34.99",
+      },
+      {
+        name: "Boston Fern",
+        image: potSVG({ leaf: "#3B7A4A", leaf2: "#57975F", pot: potAlt, potDark: potAltDark, shape: "trail" }),
+        description: "Lush, arching fronds that love a humid bathroom shelf.",
+        cost: "$19.99",
+      },
+      {
+        name: "Rubber Plant",
+        image: potSVG({ leaf: "#28563A", leaf2: "#376E48", pot, potDark, shape: "round" }),
+        description: "Broad, deep-green leaves with a bold, architectural shape.",
+        cost: "$27.99",
+      },
+      {
+        name: "Spider Plant",
+        image: potSVG({ leaf: "#4C8B4F", leaf2: "#6AA766", pot: potAlt, potDark: potAltDark, shape: "trail" }),
+        description: "Fast-growing and forgiving, with cascading striped leaves.",
+        cost: "$17.99",
+      },
+    ],
   },
   {
-    id: "aromatic",
-    name: "Aromatic Plants",
-    blurb: "Fragrant greenery that fills a room without a single candle.",
+    category: "Aromatic Plants",
+    plants: [
+      {
+        name: "Lavender",
+        image: potSVG({ leaf: "#7E6BA6", leaf2: "#9A85C2", pot, potDark, shape: "small" }),
+        description: "Silvery leaves and purple spikes with a calming scent.",
+        cost: "$21.99",
+      },
+      {
+        name: "Jasmine",
+        image: potSVG({ leaf: "#3A7047", leaf2: "#4F8C5C", pot: potAlt, potDark: potAltDark, shape: "trail" }),
+        description: "Delicate white flowers with an unmistakable sweet fragrance.",
+        cost: "$25.99",
+      },
+      {
+        name: "Rosemary",
+        image: potSVG({ leaf: "#3F6B4E", leaf2: "#568865", pot, potDark, shape: "spiky" }),
+        description: "Needle-like leaves with a sharp, woody, kitchen-ready scent.",
+        cost: "$15.99",
+      },
+      {
+        name: "Mint",
+        image: potSVG({ leaf: "#4A9155", leaf2: "#66AD70", pot: potAlt, potDark: potAltDark, shape: "round" }),
+        description: "Bright, fast-spreading leaves with a crisp, cool aroma.",
+        cost: "$12.99",
+      },
+      {
+        name: "Eucalyptus",
+        image: potSVG({ leaf: "#6E9E93", leaf2: "#89B6AC", pot, potDark, shape: "round" }),
+        description: "Silvery-blue rounded leaves with a fresh, medicinal scent.",
+        cost: "$22.99",
+      },
+      {
+        name: "Basil",
+        image: potSVG({ leaf: "#4C8B4F", leaf2: "#6BA76F", pot: potAlt, potDark: potAltDark, shape: "small" }),
+        description: "Tender bright-green leaves, sweet and peppery in the air.",
+        cost: "$11.99",
+      },
+    ],
   },
   {
-    id: "succulents",
-    name: "Succulents",
-    blurb: "Low-maintenance shapes for windowsills and desks.",
+    category: "Succulents",
+    plants: [
+      {
+        name: "Echeveria",
+        image: potSVG({ leaf: "#7FA88E", leaf2: "#9CC0A9", pot, potDark, shape: "small" }),
+        description: "A tidy rosette of pale blue-green leaves, easy to love.",
+        cost: "$14.99",
+      },
+      {
+        name: "Jade Plant",
+        image: potSVG({ leaf: "#4F8F5E", leaf2: "#6BAA79", pot: potAlt, potDark: potAltDark, shape: "round" }),
+        description: "Thick, glossy leaves on sturdy stems said to bring luck.",
+        cost: "$18.99",
+      },
+      {
+        name: "Aloe Vera",
+        image: potSVG({ leaf: "#5B9E6C", leaf2: "#78B888", pot, potDark, shape: "spiky" }),
+        description: "Serrated, upright leaves with soothing gel inside.",
+        cost: "$16.99",
+      },
+      {
+        name: "Haworthia",
+        image: potSVG({ leaf: "#3E7A56", leaf2: "#569372", pot: potAlt, potDark: potAltDark, shape: "small" }),
+        description: "Small, striped, zebra-like leaves perfect for tight spaces.",
+        cost: "$13.99",
+      },
+      {
+        name: "Barrel Cactus",
+        image: potSVG({ leaf: "#5E8F5A", leaf2: "#79A876", pot, potDark, shape: "round" }),
+        description: "A round, ribbed silhouette that needs almost no attention.",
+        cost: "$20.99",
+      },
+      {
+        name: "String of Pearls",
+        image: potSVG({ leaf: "#579069", leaf2: "#71AB82", pot: potAlt, potDark: potAltDark, shape: "trail" }),
+        description: "Bead-like trailing leaves that spill over the pot's edge.",
+        cost: "$19.99",
+      },
+    ],
   },
 ];
-
-const palette = {
-  pot: "#B5653F",
-  potDark: "#8C4A2C",
-  potAlt: "#7A6A53",
-  potAltDark: "#5C4E3B",
-};
-
-const plants = [
-  // Air Purifying Plants
-  {
-    id: 1,
-    name: "Snake Plant",
-    category: "air-purifying",
-    price: 24.99,
-    description:
-      "A hardy upright plant known for filtering indoor air even in low light.",
-    image: potSVG({ leaf: "#2F6B3A", leaf2: "#3E8B4A", pot: palette.pot, potDark: palette.potDark, shape: "spiky" }),
-  },
-  {
-    id: 2,
-    name: "Peace Lily",
-    category: "air-purifying",
-    price: 29.99,
-    description: "Glossy leaves and white blooms that thrive in shaded corners.",
-    image: potSVG({ leaf: "#356B45", leaf2: "#4A8759", pot: palette.potAlt, potDark: palette.potAltDark, shape: "fan" }),
-  },
-  {
-    id: 3,
-    name: "Areca Palm",
-    category: "air-purifying",
-    price: 34.99,
-    description: "Feathery fronds that bring a breezy, tropical feel indoors.",
-    image: potSVG({ leaf: "#2E6E4C", leaf2: "#3E8A63", pot: palette.pot, potDark: palette.potDark, shape: "fan" }),
-  },
-  {
-    id: 4,
-    name: "Boston Fern",
-    category: "air-purifying",
-    price: 19.99,
-    description: "Lush, arching fronds that love a humid bathroom shelf.",
-    image: potSVG({ leaf: "#3B7A4A", leaf2: "#57975F", pot: palette.potAlt, potDark: palette.potAltDark, shape: "trail" }),
-  },
-  {
-    id: 5,
-    name: "Rubber Plant",
-    category: "air-purifying",
-    price: 27.99,
-    description: "Broad, deep-green leaves with a bold, architectural shape.",
-    image: potSVG({ leaf: "#28563A", leaf2: "#376E48", pot: palette.pot, potDark: palette.potDark, shape: "round" }),
-  },
-  {
-    id: 6,
-    name: "Spider Plant",
-    category: "air-purifying",
-    price: 17.99,
-    description: "Fast-growing and forgiving, with cascading striped leaves.",
-    image: potSVG({ leaf: "#4C8B4F", leaf2: "#6AA766", pot: palette.potAlt, potDark: palette.potAltDark, shape: "trail" }),
-  },
-
-  // Aromatic Plants
-  {
-    id: 7,
-    name: "Lavender",
-    category: "aromatic",
-    price: 21.99,
-    description: "Silvery leaves and purple spikes with a calming scent.",
-    image: potSVG({ leaf: "#7E6BA6", leaf2: "#9A85C2", pot: palette.pot, potDark: palette.potDark, shape: "small" }),
-  },
-  {
-    id: 8,
-    name: "Jasmine",
-    category: "aromatic",
-    price: 25.99,
-    description: "Delicate white flowers with an unmistakable sweet fragrance.",
-    image: potSVG({ leaf: "#3A7047", leaf2: "#4F8C5C", pot: palette.potAlt, potDark: palette.potAltDark, shape: "trail" }),
-  },
-  {
-    id: 9,
-    name: "Rosemary",
-    category: "aromatic",
-    price: 15.99,
-    description: "Needle-like leaves with a sharp, woody, kitchen-ready scent.",
-    image: potSVG({ leaf: "#3F6B4E", leaf2: "#568865", pot: palette.pot, potDark: palette.potDark, shape: "spiky" }),
-  },
-  {
-    id: 10,
-    name: "Mint",
-    category: "aromatic",
-    price: 12.99,
-    description: "Bright, fast-spreading leaves with a crisp, cool aroma.",
-    image: potSVG({ leaf: "#4A9155", leaf2: "#66AD70", pot: palette.potAlt, potDark: palette.potAltDark, shape: "round" }),
-  },
-  {
-    id: 11,
-    name: "Eucalyptus",
-    category: "aromatic",
-    price: 22.99,
-    description: "Silvery-blue rounded leaves with a fresh, medicinal scent.",
-    image: potSVG({ leaf: "#6E9E93", leaf2: "#89B6AC", pot: palette.pot, potDark: palette.potDark, shape: "round" }),
-  },
-  {
-    id: 12,
-    name: "Basil",
-    category: "aromatic",
-    price: 11.99,
-    description: "Tender bright-green leaves, sweet and peppery in the air.",
-    image: potSVG({ leaf: "#4C8B4F", leaf2: "#6BA76F", pot: palette.potAlt, potDark: palette.potAltDark, shape: "small" }),
-  },
-
-  // Succulents
-  {
-    id: 13,
-    name: "Echeveria",
-    category: "succulents",
-    price: 14.99,
-    description: "A tidy rosette of pale blue-green leaves, easy to love.",
-    image: potSVG({ leaf: "#7FA88E", leaf2: "#9CC0A9", pot: palette.pot, potDark: palette.potDark, shape: "small" }),
-  },
-  {
-    id: 14,
-    name: "Jade Plant",
-    category: "succulents",
-    price: 18.99,
-    description: "Thick, glossy leaves on sturdy stems said to bring luck.",
-    image: potSVG({ leaf: "#4F8F5E", leaf2: "#6BAA79", pot: palette.potAlt, potDark: palette.potAltDark, shape: "round" }),
-  },
-  {
-    id: 15,
-    name: "Aloe Vera",
-    category: "succulents",
-    price: 16.99,
-    description: "Serrated, upright leaves with soothing gel inside.",
-    image: potSVG({ leaf: "#5B9E6C", leaf2: "#78B888", pot: palette.pot, potDark: palette.potDark, shape: "spiky" }),
-  },
-  {
-    id: 16,
-    name: "Haworthia",
-    category: "succulents",
-    price: 13.99,
-    description: "Small, striped, zebra-like leaves perfect for tight spaces.",
-    image: potSVG({ leaf: "#3E7A56", leaf2: "#569372", pot: palette.potAlt, potDark: palette.potAltDark, shape: "small" }),
-  },
-  {
-    id: 17,
-    name: "Barrel Cactus",
-    category: "succulents",
-    price: 20.99,
-    description: "A round, ribbed silhouette that needs almost no attention.",
-    image: potSVG({ leaf: "#5E8F5A", leaf2: "#79A876", pot: palette.pot, potDark: palette.potDark, shape: "round" }),
-  },
-  {
-    id: 18,
-    name: "String of Pearls",
-    category: "succulents",
-    price: 19.99,
-    description: "Bead-like trailing leaves that spill over the pot's edge.",
-    image: potSVG({ leaf: "#579069", leaf2: "#71AB82", pot: palette.potAlt, potDark: palette.potAltDark, shape: "trail" }),
-  },
-];
-
-export { categories, plants };

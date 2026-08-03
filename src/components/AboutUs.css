@@ -1,46 +1,26 @@
-.about-us {
-  background: #f6f7f1;
-  padding: 5rem 2rem;
-  display: flex;
-  justify-content: center;
+.about-us-container {
+  max-width: 640px;
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid #e4a94a;
+  padding: 1.4rem 1.8rem;
+  border-radius: 6px;
+  color: #f4f6f0;
 }
 
-.about-us-content {
-  max-width: 680px;
-  text-align: left;
+.about-us-container h2 {
+  font-family: "Georgia", serif;
+  font-size: 1.6rem;
+  margin: 0 0 1rem 0;
+  color: #ffffff;
 }
 
-.about-eyebrow {
-  display: inline-block;
-  font-family: "Work Sans", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: #a6553f;
-  margin-bottom: 0.6rem;
+.about-us-container p {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #dfe6da;
+  margin-bottom: 0.9rem;
 }
 
-.about-us-content h2 {
-  font-family: "Fraunces", serif;
-  font-size: 2.2rem;
-  color: #1b3b2f;
-  margin: 0 0 1.4rem 0;
-}
-
-.about-us-content p {
-  font-family: "Work Sans", sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: #333d34;
-  margin-bottom: 1.2rem;
-}
-
-@media (max-width: 560px) {
-  .about-us {
-    padding: 3.5rem 1.25rem;
-  }
-  .about-us-content h2 {
-    font-size: 1.7rem;
-  }
+.about-us-container p:last-child {
+  margin-bottom: 0;
 }
